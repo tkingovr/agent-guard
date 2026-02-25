@@ -1,0 +1,25 @@
+version: 1
+settings:
+  default_action: log
+  log_dir: ~/.agentguard/logs
+  dashboard_addr: "127.0.0.1:8080"
+  approval_timeout: "5m"
+
+rules:
+  - name: block-ssh-keys
+    match:
+      method: "tools/call"
+      arguments:
+        _any_value:
+          regex: "(\\.ssh/|id_rsa|id_ed25519)"
+    action: deny
+    message: "SSH key access blocked"
+
+  - name: block-dangerous-commands
+    match:
+      method: "tools/call"
+      arguments:
+        _any_value:
+          regex: "(rm\\s+-rf\\s+/|curl.*\\|.*bash)"
+    action: deny
+    message: "Dangerous command pattern blocked"
