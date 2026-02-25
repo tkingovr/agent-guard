@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 func TestLoadBytes_DefaultDeny(t *testing.T) {

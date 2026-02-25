@@ -3,7 +3,7 @@ package filter
 import (
 	"context"
 
-	"github.com/aqubia/agent-guard/internal/audit"
+	"github.com/tkingovr/agent-guard/internal/audit"
 )
 
 // AuditFilter writes an audit record for every processed message.

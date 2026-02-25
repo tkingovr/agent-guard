@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"time"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // Status represents the state of an approval request.

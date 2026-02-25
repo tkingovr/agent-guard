@@ -9,10 +9,10 @@ import (
 	"log/slog"
 	"os"
 
-	"github.com/aqubia/agent-guard/api"
-	"github.com/aqubia/agent-guard/internal/approval"
-	"github.com/aqubia/agent-guard/internal/filter"
-	"github.com/aqubia/agent-guard/internal/jsonrpc"
+	"github.com/tkingovr/agent-guard/api"
+	"github.com/tkingovr/agent-guard/internal/approval"
+	"github.com/tkingovr/agent-guard/internal/filter"
+	"github.com/tkingovr/agent-guard/internal/jsonrpc"
 )
 
 // Proxy is the stdio MITM proxy that sits between the AI host and the real MCP server.

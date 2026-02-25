@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"sync"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // YAMLEngine implements first-match-wins policy evaluation using YAML rules.

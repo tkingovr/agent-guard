@@ -3,7 +3,7 @@ package filter
 import (
 	"context"
 
-	"github.com/aqubia/agent-guard/internal/jsonrpc"
+	"github.com/tkingovr/agent-guard/internal/jsonrpc"
 )
 
 // ParseFilter extracts method, tool, and arguments from the raw JSON-RPC message.

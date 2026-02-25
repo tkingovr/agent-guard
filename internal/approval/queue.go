@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // Queue manages pending approval requests.

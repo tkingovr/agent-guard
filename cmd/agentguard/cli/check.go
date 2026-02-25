@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/aqubia/agent-guard/internal/config"
-	"github.com/aqubia/agent-guard/internal/policy"
+	"github.com/tkingovr/agent-guard/internal/config"
+	"github.com/tkingovr/agent-guard/internal/policy"
 	"github.com/spf13/cobra"
 )
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // OutboundParseFilter does lightweight parsing of outbound (server→client) messages.

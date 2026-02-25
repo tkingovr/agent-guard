@@ -8,12 +8,12 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/aqubia/agent-guard/internal/approval"
-	"github.com/aqubia/agent-guard/internal/audit"
-	"github.com/aqubia/agent-guard/internal/config"
-	"github.com/aqubia/agent-guard/internal/filter"
-	"github.com/aqubia/agent-guard/internal/policy"
-	stdioproxy "github.com/aqubia/agent-guard/internal/proxy/stdio"
+	"github.com/tkingovr/agent-guard/internal/approval"
+	"github.com/tkingovr/agent-guard/internal/audit"
+	"github.com/tkingovr/agent-guard/internal/config"
+	"github.com/tkingovr/agent-guard/internal/filter"
+	"github.com/tkingovr/agent-guard/internal/policy"
+	stdioproxy "github.com/tkingovr/agent-guard/internal/proxy/stdio"
 	"github.com/spf13/cobra"
 )
 

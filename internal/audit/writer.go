@@ -10,7 +10,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // JSONLStore is an append-only JSONL file audit store with date-based rotation.

@@ -2,7 +2,7 @@
 
 BINARY := agentguard
 VERSION := $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
-LDFLAGS := -ldflags "-X github.com/aqubia/agent-guard/cmd/agentguard/cli.version=$(VERSION)"
+LDFLAGS := -ldflags "-X github.com/tkingovr/agent-guard/cmd/agentguard/cli.version=$(VERSION)"
 
 build:
 	go build $(LDFLAGS) -o bin/$(BINARY) ./cmd/agentguard

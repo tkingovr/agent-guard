@@ -3,7 +3,7 @@ package audit
 import (
 	"context"
 
-	"github.com/aqubia/agent-guard/api"
+	"github.com/tkingovr/agent-guard/api"
 )
 
 // Store defines the interface for audit record persistence and retrieval.

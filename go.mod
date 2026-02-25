@@ -1,4 +1,4 @@
-module github.com/aqubia/agent-guard
+module github.com/tkingovr/agent-guard
 
 go 1.25.5
 
