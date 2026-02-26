@@ -3,6 +3,7 @@ package filter
 import (
 	"context"
 	"encoding/json"
+	"io"
 	"log/slog"
 	"testing"
 
@@ -11,7 +12,7 @@ import (
 )
 
 func newTestLogger() *slog.Logger {
-	return slog.New(slog.NewTextHandler(nil, nil))
+	return slog.New(slog.NewTextHandler(io.Discard, nil))
 }
 
 func TestFilterChain_ParseAndPolicy(t *testing.T) {
