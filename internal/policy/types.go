@@ -15,10 +15,31 @@ type PolicyFile struct {
 
 // Settings contains global policy settings.
 type Settings struct {
-	DefaultAction   api.Verdict `yaml:"default_action" json:"default_action"`
-	LogDir          string      `yaml:"log_dir" json:"log_dir"`
-	DashboardAddr   string      `yaml:"dashboard_addr" json:"dashboard_addr"`
-	ApprovalTimeout string      `yaml:"approval_timeout" json:"approval_timeout"`
+	DefaultAction   api.Verdict      `yaml:"default_action" json:"default_action"`
+	LogDir          string           `yaml:"log_dir" json:"log_dir"`
+	DashboardAddr   string           `yaml:"dashboard_addr" json:"dashboard_addr"`
+	ApprovalTimeout string           `yaml:"approval_timeout" json:"approval_timeout"`
+	OPAPolicy       string           `yaml:"opa_policy,omitempty" json:"opa_policy,omitempty"`
+	SecretScanner   *SecretSettings  `yaml:"secret_scanner,omitempty" json:"secret_scanner,omitempty"`
+	RateLimit       *RateLimitSettings `yaml:"rate_limit,omitempty" json:"rate_limit,omitempty"`
+}
+
+// SecretSettings configures the secret scanner filter.
+type SecretSettings struct {
+	Enabled          bool    `yaml:"enabled" json:"enabled"`
+	EntropyThreshold float64 `yaml:"entropy_threshold,omitempty" json:"entropy_threshold,omitempty"`
+}
+
+// RateLimitSettings configures rate limiting.
+type RateLimitSettings struct {
+	Global  *RateLimitRule            `yaml:"global,omitempty" json:"global,omitempty"`
+	PerTool map[string]*RateLimitRule `yaml:"per_tool,omitempty" json:"per_tool,omitempty"`
+}
+
+// RateLimitRule defines a rate limit: max requests per time window.
+type RateLimitRule struct {
+	Max    int    `yaml:"max" json:"max"`
+	Window string `yaml:"window" json:"window"`
 }
 
 // Rule represents a single policy rule.

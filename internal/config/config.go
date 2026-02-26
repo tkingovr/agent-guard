@@ -19,6 +19,12 @@ type Config struct {
 	DashboardAddr   string
 	ApprovalTimeout time.Duration
 	DefaultAction   api.Verdict
+
+	// Phase 5 features
+	OPAPolicy        string
+	SecretScanner    bool
+	EntropyThreshold float64
+	RateLimit        *policy.RateLimitSettings
 }
 
 // Load reads a policy YAML file and produces a runtime Config.
@@ -69,6 +75,22 @@ func fromPolicy(pf *policy.PolicyFile, path string) (*Config, error) {
 	} else {
 		cfg.ApprovalTimeout = DefaultApprovalTimeout
 	}
+
+	// OPA policy
+	if pf.Settings.OPAPolicy != "" {
+		cfg.OPAPolicy = expandHome(pf.Settings.OPAPolicy)
+	}
+
+	// Secret scanner
+	if pf.Settings.SecretScanner != nil && pf.Settings.SecretScanner.Enabled {
+		cfg.SecretScanner = true
+		if pf.Settings.SecretScanner.EntropyThreshold > 0 {
+			cfg.EntropyThreshold = pf.Settings.SecretScanner.EntropyThreshold
+		}
+	}
+
+	// Rate limiting
+	cfg.RateLimit = pf.Settings.RateLimit
 
 	return cfg, nil
 }

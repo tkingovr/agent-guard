@@ -71,18 +71,17 @@ func runProxy(cmd *cobra.Command, args []string) error {
 	// Create approval queue
 	aq := approval.NewQueue(cfg.ApprovalTimeout)
 
-	// Build inbound filter chain
-	inbound := filter.NewChain(logger,
-		filter.NewParseFilter(),
-		filter.NewPolicyFilter(engine),
-		filter.NewAuditFilter(auditStore),
-	)
-
-	// Build outbound filter chain (parse + audit only)
-	outbound := filter.NewChain(logger,
-		filter.NewOutboundParseFilter(),
-		filter.NewAuditFilter(auditStore),
-	)
+	// Build filter chains
+	chainCfg := filter.ChainConfig{
+		Engine:           engine,
+		AuditStore:       auditStore,
+		Logger:           logger,
+		SecretScanner:    cfg.SecretScanner,
+		EntropyThreshold: cfg.EntropyThreshold,
+		RateLimit:        filter.RateLimitConfigFromPolicy(cfg.RateLimit),
+	}
+	inbound := filter.BuildInboundChain(chainCfg)
+	outbound := filter.BuildOutboundChain(chainCfg)
 
 	// Create and run proxy
 	proxy := stdioproxy.NewProxy(logger, inbound, outbound, aq)

@@ -67,11 +67,15 @@ func runHTTPProxy(cmd *cobra.Command, args []string) error {
 	}
 	defer auditStore.Close()
 
-	chain := filter.NewChain(logger,
-		filter.NewParseFilter(),
-		filter.NewPolicyFilter(engine),
-		filter.NewAuditFilter(auditStore),
-	)
+	chainCfg := filter.ChainConfig{
+		Engine:           engine,
+		AuditStore:       auditStore,
+		Logger:           logger,
+		SecretScanner:    cfg.SecretScanner,
+		EntropyThreshold: cfg.EntropyThreshold,
+		RateLimit:        filter.RateLimitConfigFromPolicy(cfg.RateLimit),
+	}
+	chain := filter.BuildInboundChain(chainCfg)
 
 	proxy, err := httpproxy.NewProxy(httpTarget, chain, logger)
 	if err != nil {

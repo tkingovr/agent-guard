@@ -1,0 +1,82 @@
+version: 1
+settings:
+  default_action: deny
+  log_dir: ~/.agentguard/logs
+  dashboard_addr: "127.0.0.1:8080"
+  approval_timeout: "5m"
+
+  # OPA/Rego policy (optional, if set overrides YAML rules)
+  # opa_policy: policies/example.rego
+
+  # Secret scanner
+  secret_scanner:
+    enabled: true
+    entropy_threshold: 4.5
+
+  # Rate limiting
+  rate_limit:
+    global:
+      max: 100
+      window: "1m"
+    per_tool:
+      write_file:
+        max: 10
+        window: "1m"
+      run_command:
+        max: 5
+        window: "1m"
+
+rules:
+  # Deny rules first
+  - name: block-ssh-keys
+    match:
+      method: "tools/call"
+      arguments:
+        _any_value:
+          regex: "(\\.ssh/|id_rsa|id_ed25519)"
+    action: deny
+    message: "SSH key access blocked"
+
+  - name: block-dangerous-commands
+    match:
+      method: "tools/call"
+      arguments:
+        _any_value:
+          regex: "(rm\\s+-rf\\s+/|curl.*\\|.*bash)"
+    action: deny
+    message: "Dangerous command pattern blocked"
+
+  # Protocol
+  - name: allow-initialize
+    match:
+      method: "initialize"
+    action: allow
+
+  - name: allow-initialized
+    match:
+      method: "notifications/initialized"
+    action: allow
+
+  - name: allow-list-tools
+    match:
+      method: "tools/list"
+    action: allow
+
+  - name: allow-ping
+    match:
+      method: "ping"
+    action: allow
+
+  # Tool-level rules
+  - name: allow-read-file
+    match:
+      method: "tools/call"
+      tool: "read_file"
+    action: allow
+
+  - name: ask-write-file
+    match:
+      method: "tools/call"
+      tool: "write_file"
+    action: ask
+    message: "File write requires approval"

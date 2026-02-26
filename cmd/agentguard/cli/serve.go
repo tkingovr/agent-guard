@@ -66,15 +66,16 @@ func runServe(cmd *cobra.Command, args []string) error {
 	aq := approval.NewQueue(cfg.ApprovalTimeout)
 
 	// Build filter chains
-	inbound := filter.NewChain(logger,
-		filter.NewParseFilter(),
-		filter.NewPolicyFilter(engine),
-		filter.NewAuditFilter(auditStore),
-	)
-	outbound := filter.NewChain(logger,
-		filter.NewOutboundParseFilter(),
-		filter.NewAuditFilter(auditStore),
-	)
+	chainCfg := filter.ChainConfig{
+		Engine:           engine,
+		AuditStore:       auditStore,
+		Logger:           logger,
+		SecretScanner:    cfg.SecretScanner,
+		EntropyThreshold: cfg.EntropyThreshold,
+		RateLimit:        filter.RateLimitConfigFromPolicy(cfg.RateLimit),
+	}
+	inbound := filter.BuildInboundChain(chainCfg)
+	outbound := filter.BuildOutboundChain(chainCfg)
 
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
