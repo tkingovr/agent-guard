@@ -152,7 +152,7 @@ See [`configs/default.yaml`](configs/default.yaml) for the default deny policy a
 - [x] OPA/Rego policy engine
 - [x] Secret scanner filter (12 patterns + entropy analysis)
 - [x] Rate limiting filter (per-tool + global sliding window)
-- [ ] Python SDK (LangChain, CrewAI integrations)
+- [x] Python SDK (LangChain, CrewAI integrations)
 
 ## License
 
