@@ -16,6 +16,9 @@ AgentGuard intercepts MCP (Model Context Protocol) tool calls, evaluates them ag
 - **CLI dry-run** — test policies without running the proxy
 - **4 verdicts** — `allow`, `deny`, `ask`, `log`
 - **SDK API** — `/api/v1/check` endpoint for programmatic policy evaluation
+- **OPA/Rego engine** — embedded Open Policy Agent for complex policy logic
+- **Secret scanner** — 12 regex patterns + Shannon entropy analysis to block leaked credentials
+- **Rate limiting** — sliding window per-tool and global rate limits
 
 ## Quick Start
 
@@ -146,9 +149,9 @@ See [`configs/default.yaml`](configs/default.yaml) for the default deny policy a
 - [x] CLI (proxy, httpproxy, serve, dashboard, check, version)
 - [x] GitHub Actions CI/CD
 - [x] goreleaser cross-platform binaries
-- [ ] OPA/Rego policy engine
-- [ ] Secret scanner filter
-- [ ] Rate limiting filter
+- [x] OPA/Rego policy engine
+- [x] Secret scanner filter (12 patterns + entropy analysis)
+- [x] Rate limiting filter (per-tool + global sliding window)
 - [ ] Python SDK (LangChain, CrewAI integrations)
 
 ## License
