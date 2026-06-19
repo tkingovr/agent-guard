@@ -140,20 +140,35 @@ See [`configs/default.yaml`](configs/default.yaml) for the default deny policy a
 
 ## Roadmap
 
-- [x] stdio MCP proxy
-- [x] HTTP Streamable transport proxy
-- [x] YAML first-match-wins policy engine
-- [x] JSONL audit logging with rotation
-- [x] Web dashboard with HTMX
-- [x] Approval queue
-- [x] CLI (proxy, httpproxy, serve, dashboard, check, version)
-- [x] GitHub Actions CI/CD
-- [x] goreleaser cross-platform binaries
-- [x] OPA/Rego policy engine
-- [x] Secret scanner filter (12 patterns + entropy analysis)
-- [x] Rate limiting filter (per-tool + global sliding window)
-- [x] Python SDK (LangChain, CrewAI integrations)
+Shipped today:
+
+- [x] stdio + Streamable-HTTP MCP proxies
+- [x] YAML first-match-wins policy engine + OPA/Rego engine
+- [x] JSONL audit logging with rotation and live SSE streaming
+- [x] Web dashboard (HTMX + Tailwind) with approval queue
+- [x] Secret scanner (12 patterns + Shannon entropy)
+- [x] Sliding-window rate limiting (per-tool + global)
+- [x] Python SDK with LangChain + CrewAI integrations
+- [x] CLI: `proxy`, `httpproxy`, `serve`, `dashboard`, `check`, `version`
+- [x] GitHub Actions CI, goreleaser cross-platform binaries
+
+Coming next (1.0 target): dashboard auth, policy hot-reload, Prometheus
+metrics, Node.js/TypeScript SDK, Docker image, Homebrew tap, docs site,
+framework example configs.
+
+Beyond 1.0: OpenTelemetry traces, notification sinks, replay mode, agent
+identity, signed audit log, control-plane/data-plane split for fleet
+deployments.
+
+See [ROADMAP.md](ROADMAP.md) for the full phased plan and
+[ARCHITECTURE.md](ARCHITECTURE.md) for the scale-up design.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Security issues: see
+[SECURITY.md](SECURITY.md) — please do not open public issues for
+vulnerabilities.
 
 ## License
 
-Apache-2.0
+[Apache-2.0](LICENSE)

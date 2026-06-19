@@ -25,3 +25,7 @@ dist/
 
 # Local config
 *.local.yaml
+
+# Python bytecode
+__pycache__/
+*.pyc
